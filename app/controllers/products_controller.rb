@@ -10,6 +10,12 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
+    @product = Product.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @product }
+    end
   end
 
   # GET /products/new
@@ -24,7 +30,7 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
-    @product = Product.new
+     @product = Product.new(params[:product])
 
     respond_to do |format|
       if @product.save
@@ -40,12 +46,14 @@ class ProductsController < ApplicationController
   # PATCH/PUT /products/1
   # PATCH/PUT /products/1.json
   def update
+    @product = Product.find(params[:id])
+    
     respond_to do |format|
-      if @product.update(product_params)
+      if @product.update_attributes(params[:product])
         format.html { redirect_to @product, notice: 'Product was successfully updated.' }
         format.json { render :show, status: :ok, location: @product }
       else
-        format.html { render :edit }
+        format.html { render action: "edit" }
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end
     end

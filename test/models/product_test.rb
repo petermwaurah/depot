@@ -59,9 +59,7 @@ price:
 image_url:
 unique title" do
 products(:ruby).title,
-"yyy",
-1,
-"fred.gif")
+"yyy",1,"fred.gif"
 assert product.invalid?
 assert_equal ["has already been taken"], product.errors[:title]
 end
@@ -72,9 +70,7 @@ price:
 image_url:
 unique title - i18n" do
 products(:ruby).title,
-"yyy",
-1,
-"fred.gif")
+"yyy",1,"fred.gif"
 assert product.invalid?
 assert_equal [I18n.translate('errors.messages.taken')],
 product.errors[:title]
